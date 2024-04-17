@@ -180,7 +180,7 @@ class QR:
             box_size=10,
             border=0,
         )
-        qr.add_data(f"https://jjfenggg.github.io/QR/{self.name}.html")
+        qr.add_data(f"https://jjfenggg.github.io/fake_application_files/QR/{self.name}.html")
         qr.make(fit=True)
 
         qrimg = qr.make_image(fill_color="black", back_color="white")
