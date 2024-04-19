@@ -1,5 +1,6 @@
 import qrcode
 import os
+from PIL import Image, ImageDraw, ImageFont
 
 
 class QR:
@@ -14,6 +15,16 @@ class QR:
         self.time = input("请输入开始时间：")
         self.which_class = input("请输入节次：")
         self.tutor = input("请输入审核老师姓名：")
+        self.info = [self.name,
+                     self.id_number,
+                     self.short_long,
+                     self.false_true,
+                     self.reason,
+                     self.describe,
+                     self.destination,
+                     self.time,
+                     self.which_class,
+                     self.tutor]
 
         self.html_content = f"""
         <!DOCTYPE html>
@@ -187,7 +198,54 @@ class QR:
         return qrimg
 
 
-test = QR()
-test.html()
-test.push_qr()
-test.qr_image.show()
+class Pic:
+    def __init__(self, origin_application_path):
+        self.image = Image.open(f"{origin_application_path}")  # 把Image对象实例为image，传入原始图片
+
+    # 修改二维码
+    '''
+    这里的位置待标定，现在的是随便填的
+    '''
+
+    def paste_qr(self, qrimg, box=(100, 100)):
+        self.image.paste(qrimg, box)
+
+    # 修改文字
+    '''
+    这里的字体，还有字体大小待标定
+    还有要写入的位置待标定
+    '''
+
+    def paste_text(self, info):
+        # 创建字体实例和ImageDraw实例
+        font = ImageFont.truetype(font="", size=64, )
+        draw = ImageDraw.Draw(self.image)
+        # 开始写入
+        x = 1
+        y = 1
+        for text in info:
+            draw.text((x, y), text, font=font)
+            x += 1
+            y += 1
+
+    def save(self):
+        self.image.save("./application/{self.name}.png", "PNG")
+
+
+def main():
+    qr = QR()
+    application = Pic(origin_application_path="")  # 此处图片待补充
+    print("正在写入html...\n")
+    qr.html()
+    print("正在生成网页...\n")
+    qr.push_qr()
+    print("正在写入文本数据...\n")
+    application.paste_text(qr.info)
+    print("正在写入二维码...\n")
+    application.paste_qr(qr.qr_image)
+    application.save()
+    print("保存成功！\n 请在application目录下查看您的假假条")
+
+
+if __name__ == '__main__':
+    main()
