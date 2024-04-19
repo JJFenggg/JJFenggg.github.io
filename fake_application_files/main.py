@@ -7,24 +7,17 @@ class QR:
     def __init__(self):
         self.name = input("请输入请假人姓名：")
         self.id_number = input("请输入请假人学号：")
-        self.short_long = input("请输入请假类型（短假/长假）：")
-        self.false_true = input("是否离校（ture/false）：")
-        self.reason = input("请输入请假原因：")
-        self.describe = input("请输入原因描述：")
-        self.destination = input("请输入目的地：")
+        self.short_long = "短假"  # input("请输入请假类型（短假/长假）：")
+        self.false_true = "false"  # input("是否离校（ture/false）：")
+        self.reason = "病假"  # input("请输入请假原因：")
+        self.describe = "发烧"  # input("请输入原因描述：")
+        self.destination = "宿舍"  # input("请输入目的地：")
         self.time = input("请输入开始时间：")
-        self.which_class = input("请输入节次：")
-        self.tutor = input("请输入审核老师姓名：")
+        self.which_class = "3-4 1-2 5-6 7-8 9-11"  # input("请输入节次：")
+        self.tutor = "孔瑞；"  # input("请输入审核老师姓名：")
         self.info = [self.name,
                      self.id_number,
-                     self.short_long,
-                     self.false_true,
-                     self.reason,
-                     self.describe,
-                     self.destination,
-                     self.time,
-                     self.which_class,
-                     self.tutor]
+                     self.time,]
 
         self.html_content = f"""
         <!DOCTYPE html>
@@ -193,22 +186,22 @@ class QR:
         )
         qr.add_data(f"https://jjfenggg.github.io/fake_application_files/QR/{self.name}.html")
         qr.make(fit=True)
-
         qrimg = qr.make_image(fill_color="black", back_color="white")
+        qrimg = qrimg.resize((390, 390))
         return qrimg
 
 
 class Pic:
-    def __init__(self, origin_application_path):
-        self.image = Image.open(f"{origin_application_path}")  # 把Image对象实例为image，传入原始图片
+    def __init__(self):
+        self.image = Image.open("origin.png")  # 把Image对象实例为image，传入原始图片
 
     # 修改二维码
     '''
     这里的位置待标定，现在的是随便填的
     '''
 
-    def paste_qr(self, qrimg, box=(100, 100)):
-        self.image.paste(qrimg, box)
+    def paste_qr(self, qrimg):
+        self.image.paste(qrimg, (446, 1418))
 
     # 修改文字
     '''
@@ -218,23 +211,22 @@ class Pic:
 
     def paste_text(self, info):
         # 创建字体实例和ImageDraw实例
-        font = ImageFont.truetype(font="", size=64, )
+        font = ImageFont.truetype(font="苹方.ttf", size=48)
         draw = ImageDraw.Draw(self.image)
         # 开始写入
-        x = 1
-        y = 1
-        for text in info:
-            draw.text((x, y), text, font=font)
-            x += 1
-            y += 1
+        name, id_number, time = info
+        draw.text((403, 410), name, font=font, fill="black")
+        draw.text((403, 483), id_number, font=font, fill="black")
+        draw.text((403, 915), time, font=font, fill="black")
 
-    def save(self):
-        self.image.save("./application/{self.name}.png", "PNG")
+    def save(self, filename):
+        with open(f"./application/{filename}.png", "wb") as f:
+            self.image.save(f)
 
 
 def main():
     qr = QR()
-    application = Pic(origin_application_path="")  # 此处图片待补充
+    application = Pic()  # 此处图片待补充
     print("正在写入html...\n")
     qr.html()
     print("正在生成网页...\n")
@@ -243,7 +235,7 @@ def main():
     application.paste_text(qr.info)
     print("正在写入二维码...\n")
     application.paste_qr(qr.qr_image)
-    application.save()
+    application.save(qr.name)
     print("保存成功！\n 请在application目录下查看您的假假条")
 
 
