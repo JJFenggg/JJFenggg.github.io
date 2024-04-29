@@ -9,15 +9,19 @@ class QR:
         self.id_number = input("请输入请假人学号：")
         self.short_long = "短假"  # input("请输入请假类型（短假/长假）：")
         self.false_true = "false"  # input("是否离校（ture/false）：")
-        self.reason = "病假"  # input("请输入请假原因：")
-        self.describe = "发烧"  # input("请输入原因描述：")
-        self.destination = "宿舍"  # input("请输入目的地：")
+        self.reason = input("请输入请假原因：")
+        self.describe = input("请输入原因描述：")
+        self.destination = input("请输入目的地：")
         self.time = input("请输入开始时间：")
         self.which_class = "3-4 1-2 5-6 7-8 9-11"  # input("请输入节次：")
         self.tutor = "孔瑞；"  # input("请输入审核老师姓名：")
         self.info = [self.name,
                      self.id_number,
-                     self.time,]
+                     self.time,
+                     self.reason,
+                     self.describe,
+                     self.destination
+                     ]
 
         self.html_content = f"""
         <!DOCTYPE html>
@@ -148,7 +152,7 @@ class QR:
             </tr>
             <tr>
                 <th>审核老师姓名</th>
-                <td>{self.tutor}; </td>
+                <td>{self.tutor}</td>
             </tr>
             </tbody>
         </table>
@@ -214,10 +218,13 @@ class Pic:
         font = ImageFont.truetype(font="苹方.ttf", size=48)
         draw = ImageDraw.Draw(self.image)
         # 开始写入
-        name, id_number, time = info
+        name, id_number, time, reason, describe, destination = info
         draw.text((403, 410), name, font=font, fill="black")
         draw.text((403, 483), id_number, font=font, fill="black")
         draw.text((403, 915), time, font=font, fill="black")
+        draw.text((403, 699), reason, font=font, fill="black")
+        draw.text((403, 770), describe, font=font, fill="black")
+        draw.text((403, 843), destination, font=font, fill="black")
 
     def save(self, filename):
         with open(f"./application/{filename}.png", "wb") as f:
