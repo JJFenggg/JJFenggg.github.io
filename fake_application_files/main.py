@@ -14,13 +14,14 @@ class QR:
         self.destination = input("请输入目的地：")
         self.time = input("请输入开始时间：")
         self.which_class = "3-4 1-2 5-6 7-8 9-11"  # input("请输入节次：")
-        self.tutor = "孔瑞；"  # input("请输入审核老师姓名：")
+        self.tutor = input("请输入审核老师姓名：")
         self.info = [self.name,
                      self.id_number,
                      self.time,
                      self.reason,
                      self.describe,
-                     self.destination
+                     self.destination,
+                     self.tutor
                      ]
 
         self.html_content = f"""
@@ -170,12 +171,12 @@ class QR:
 
     # 生成html文件
     def html(self):
-        with open(f"./QR/{self.name}.html", "w", encoding="utf-8") as f:
+        with open(f"./QR/{self.name}{self.time}.html", "w", encoding="utf-8") as f:
             f.write(self.html_content)
 
     # 把二维码上传到网页
     def push_qr(self):
-        os.system(f"git add ./QR/{self.name}.html")
+        os.system(f"git add ./QR/{self.name}{self.time}.html")
         os.system("git commit -m 'update'")
         os.system("git push origin main")
 
@@ -188,7 +189,7 @@ class QR:
             box_size=10,
             border=0,
         )
-        qr.add_data(f"https://jjfenggg.github.io/fake_application_files/QR/{self.name}.html")
+        qr.add_data(f"https://jjfenggg.github.io/fake_application_files/QR/{self.name}{self.time}.html")
         qr.make(fit=True)
         qrimg = qr.make_image(fill_color="black", back_color="white")
         qrimg = qrimg.resize((390, 390))
@@ -218,16 +219,17 @@ class Pic:
         font = ImageFont.truetype(font="苹方.ttf", size=48)
         draw = ImageDraw.Draw(self.image)
         # 开始写入
-        name, id_number, time, reason, describe, destination = info
+        name, id_number, time, reason, describe, destination, tutor = info
         draw.text((403, 410), name, font=font, fill="black")
         draw.text((403, 483), id_number, font=font, fill="black")
         draw.text((403, 915), time, font=font, fill="black")
         draw.text((403, 699), reason, font=font, fill="black")
         draw.text((403, 770), describe, font=font, fill="black")
         draw.text((403, 843), destination, font=font, fill="black")
+        draw.text((403, 1260), tutor, font=font, fill="black")
 
-    def save(self, filename):
-        with open(f"./application/{filename}.png", "wb") as f:
+    def save(self, filename, time):
+        with open(f"./application/{filename}{time}.png", "wb") as f:
             self.image.save(f)
 
 
@@ -242,7 +244,7 @@ def main():
     application.paste_text(qr.info)
     print("正在写入二维码...\n")
     application.paste_qr(qr.qr_image)
-    application.save(qr.name)
+    application.save(qr.name, qr.time)
     print("保存成功！\n 请在application目录下查看您的假假条")
 
 
