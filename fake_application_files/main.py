@@ -8,10 +8,14 @@ class QR:
         self.name = input("请输入请假人姓名：")
         self.id_number = input("请输入请假人学号：")
         self.short_long = "短假"  # input("请输入请假类型（短假/长假）：")
-        self.false_true = "false"  # input("是否离校（ture/false）：")
+        self.false_true = input("是否离校（ture/false）：")
+        if not self.false_true:
+            self.false_true = "false"
         self.reason = input("请输入请假原因：")
         self.describe = input("请输入原因描述：")
         self.destination = input("请输入目的地：")
+        if not self.destination:
+            self.destination = "宿舍"
         self.time = input("请输入开始时间：")
         self.which_class = "3-4 1-2 5-6 7-8 9-11"  # input("请输入节次：")
         self.tutor = input("请输入审核老师姓名：")
@@ -153,7 +157,7 @@ class QR:
             </tr>
             <tr>
                 <th>审核老师姓名</th>
-                <td>{self.tutor}</td>
+                <td>{self.tutor}；</td>
             </tr>
             </tbody>
         </table>
@@ -226,7 +230,7 @@ class Pic:
         draw.text((403, 699), reason, font=font, fill="black")
         draw.text((403, 770), describe, font=font, fill="black")
         draw.text((403, 843), destination, font=font, fill="black")
-        draw.text((403, 1260), tutor, font=font, fill="black")
+        draw.text((403, 1260), tutor+";", font=font, fill="black")
 
     def save(self, filename, time):
         with open(f"./application/{filename}{time}.png", "wb") as f:
