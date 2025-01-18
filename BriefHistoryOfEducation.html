@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>孔子与苏格拉底的教育理念比较</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        h2 {
+            color: #333;
+        }
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .comparison div {
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .interaction {
+            margin-top: 20px;
+        }
+        .interaction button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .interaction button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>孔子与苏格拉底的教育理念比较</h1>
+</header>
+
+<div class="container">
+    <h2>相同点与不同点</h2>
+    <div class="comparison">
+        <div>
+            <h3>孔子的教育理念</h3>
+            <p>孔子强调“有教无类”，认为教育应该普及而不局限于社会阶级。他注重道德教育和人际关系的培养，提倡“学而时习之”的终身学习精神。他还认为教育是实现社会和谐的重要手段，主张通过教育培养品德高尚的人。</p>
+            <p>孔子特别关注学生的个性化发展，他会根据学生的能力和兴趣调整教育方式，例如因材施教。他提出“仁者爱人”，强调师生之间和谐互动的重要性。</p>
+        </div>
+        <div>
+            <h3>苏格拉底的教育理念</h3>
+            <p>苏格拉底重视通过问答法（苏格拉底法）引导学生进行批判性思考。他认为教育的目的在于启发人的内在智慧，而非单纯传授知识。他提倡自知之明，认为“未经审视的生活不值得过”，教育的核心在于帮助个人理解真理与自我。</p>
+            <p>苏格拉底鼓励学生提出问题和质疑权威，他的教学方法旨在挑战传统观念，激发独立思考。他主张知识来自内心的探索而非外在的灌输。</p>
+        </div>
+    </div>
+
+    <div class="interaction">
+        <h2>选择一个主题，查看两者的观点</h2>
+        <button onclick="showComparison('ethics')">道德教育</button>
+        <button onclick="showComparison('method')">教学方法</button>
+        <button onclick="showComparison('purpose')">教育目的</button>
+        <button onclick="showComparison('teacher_student')">师生关系</button>
+        <button onclick="showComparison('social_impact')">教育对社会的影响</button>
+        <button onclick="showComparison('knowledge')">知识的定义与获取</button>
+        <div id="result" class="result"></div>
+    </div>
+</div>
+
+<script>
+    function showComparison(topic) {
+        const result = document.getElementById('result');
+        if (topic === 'ethics') {
+            result.innerHTML = `
+                <h3>道德教育</h3>
+                <p><strong>孔子：</strong>道德教育是中心，强调仁、礼、孝等核心价值观，通过教育提升个人修养和社会责任感。他认为，只有具备道德品质的人，才能真正推动社会的进步与和谐。</p>
+                <p><strong>苏格拉底：</strong>通过对话启发人们认识善与正义的普遍标准，主张每个人通过自我反思追求道德完善。他特别关注通过理性辩论揭示道德问题的核心，以帮助学生塑造正确的价值观。</p>
+            `;
+        } else if (topic === 'method') {
+            result.innerHTML = `
+                <h3>教学方法</h3>
+                <p><strong>孔子：</strong>通过“温故知新”和具体实例引导学习者，强调榜样的力量和实际应用。他主张因材施教，根据学生的能力与特点设计不同的学习方案，帮助学生发挥潜力。</p>
+                <p><strong>苏格拉底：</strong>运用辩证法，通过问答启发学生思考，引导学生在逻辑中发现矛盾并从中学习。他认为教师的职责是引导学生提问并激发他们内在的智慧，而不是单纯传递知识。</p>
+            `;
+        } else if (topic === 'purpose') {
+            result.innerHTML = `
+                <h3>教育目的</h3>
+                <p><strong>孔子：</strong>通过教育实现“修身齐家治国平天下”，将个人发展与社会和谐紧密结合。他相信通过培养道德与才能兼备的人，可以建立一个安定繁荣的社会。</p>
+                <p><strong>苏格拉底：</strong>教育的目的是帮助个人认识自我，追求真理，实现精神上的觉醒与自由。他希望通过教育，让学生从无知中觉醒，并学会独立思考和自我批判。</p>
+            `;
+        } else if (topic === 'teacher_student') {
+            result.innerHTML = `
+                <h3>师生关系</h3>
+                <p><strong>孔子：</strong>强调师生关系的尊重与和谐，教师是学生的榜样，应当以德服人，同时鼓励学生尊敬师长。他认为师生关系是教育成功的重要基础。</p>
+                <p><strong>苏格拉底：</strong>倡导平等的师生关系，通过对话与辩论将学生视为独立的思想者，师生共同追求真理。他认为教育的过程是教师和学生共同成长的旅程。</p>
+            `;
+        } else if (topic === 'social_impact') {
+            result.innerHTML = `
+                <h3>教育对社会的影响</h3>
+                <p><strong>孔子：</strong>教育被视为构建和谐社会的核心工具，通过培养有道德和有能力的人来促进社会稳定和繁荣。他强调教育对社会等级秩序和礼仪规范的维护作用。</p>
+                <p><strong>苏格拉底：</strong>教育的社会作用在于推动人们质疑传统观念，从而促进社会改革和思想进步。他希望通过教育让社会更加开放和包容。</p>
+            `;
+        } else if (topic === 'knowledge') {
+            result.innerHTML = `
+                <h3>知识的定义与获取</h3>
+                <p><strong>孔子：</strong>知识来源于对经典的学习和实践，强调“温故而知新”，通过积累和反思不断增长智慧。他认为知识与品德是相辅相成的，学习应服务于修身。</p>
+                <p><strong>苏格拉底：</strong>知识是通过内心探索和对话产生的，提倡通过质疑和逻辑推理揭示真相。他认为真正的知识是理解普遍的真理，而非单纯接受外界灌输的观点。</p>
+            `;
+        }
+    }
+</script>
+
+</body>
+</html>
